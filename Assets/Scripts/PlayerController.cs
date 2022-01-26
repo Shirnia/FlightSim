@@ -31,54 +31,69 @@ public class PlayerController : MonoBehaviour {
 
         planeCamera.SetPlane(plane);
     }
-    public void OnToggleHelp(InputAction.CallbackContext context) {
-        if (plane == null) return;
 
-        if (context.phase == InputActionPhase.Performed) {
+
+    public void OnToggleHelp(InputAction.CallbackContext context) {
+        ToggleHelp(context.performed);
+    }
+
+    public void ToggleHelp(bool context)
+    {
+        if (plane == null) return;
+        if (context) {
             planeHUD.ToggleHelpDialogs();
         }
     }
 
     public void SetThrottleInput(InputAction.CallbackContext context) {
+
+        SetThrottleInput(context.ReadValue<float>());
+    }
+    public void SetThrottleInput(float context) 
+    {
         if (plane == null) return;
         if (aiController.enabled) return;
-
-        plane.SetThrottleInput(context.ReadValue<float>());
+        plane.SetThrottleInput(context);
     }
+
 
     public void OnRollPitchInput(InputAction.CallbackContext context) {
+        OnRollPitchInput(context.ReadValue<Vector2>());
+    }
+    public void OnRollPitchInput(Vector2 context) {
         if (plane == null) return;
-
-        var input = context.ReadValue<Vector2>();
-        controlInput = new Vector3(input.y, controlInput.y, -input.x);
+        controlInput = new Vector3(context.y, controlInput.y, -context.x);
     }
 
-    public void OnYawInput(InputAction.CallbackContext context) {
-        if (plane == null) return;
 
-        var input = context.ReadValue<float>();
-        controlInput = new Vector3(controlInput.x, input, controlInput.z);
+    public void OnYawInput(InputAction.CallbackContext context) {        
+        OnYawInput(context.ReadValue<float>());
+    }
+    public void OnYawInput(float context) {
+        if (plane == null) return;
+        controlInput = new Vector3(controlInput.x, context, controlInput.z);
     }
 
-    public void OnCameraInput(InputAction.CallbackContext context) {
-        if (plane == null) return;
-
-        var input = context.ReadValue<Vector2>();
-        planeCamera.SetInput(input);
-    }
 
     public void OnFlapsInput(InputAction.CallbackContext context) {
+        OnFlapsInput(context.phase == InputActionPhase.Performed);
+    }
+    public void OnFlapsInput(bool context) {
         if (plane == null) return;
 
-        if (context.phase == InputActionPhase.Performed) {
+        if (context) {
             plane.ToggleFlaps();
         }
     }
 
+
     public void OnFireMissile(InputAction.CallbackContext context) {
+        OnFireMissile(context.phase == InputActionPhase.Performed);
+    }
+    public void OnFireMissile(bool context) {
         if (plane == null) return;
 
-        if (context.phase == InputActionPhase.Performed) {
+        if (context) {
             plane.TryFireMissile();
         }
     }
@@ -87,8 +102,17 @@ public class PlayerController : MonoBehaviour {
         if (plane == null) return;
 
         if (context.phase == InputActionPhase.Started) {
-            plane.SetCannonInput(true);
+            OnFireCannon(true);
         } else if (context.phase == InputActionPhase.Canceled) {
+            OnFireCannon(false);
+        }
+    }
+    public void OnFireCannon(bool context) {
+        if (plane == null) return;
+
+        if (context) {
+            plane.SetCannonInput(true);
+        } else {
             plane.SetCannonInput(false);
         }
     }
@@ -99,6 +123,12 @@ public class PlayerController : MonoBehaviour {
         if (aiController != null) {
             aiController.enabled = !aiController.enabled;
         }
+    }
+    public void OnCameraInput(InputAction.CallbackContext context) {
+        if (plane == null) return;
+
+        var input = context.ReadValue<Vector2>();
+        planeCamera.SetInput(input);
     }
 
     void Update() {

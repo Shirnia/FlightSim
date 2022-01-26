@@ -1,0 +1,33 @@
+{
+    "space_type" : "Discrete",
+    "branches" : [
+        {
+            "action_type"   : "Throttle",
+            "branch_values" : [0,0.5,1]
+        },
+        {
+            "action_type"   : "Pitch",
+            "branch_values" : [-1,0,1]
+        }, 
+        {
+            "action_type"   : "Roll",
+            "branch_values" : [-1,0,1]
+        },       
+        {
+            "action_type"   : "Yaw",
+            "branch_values" : [-1,0,1]
+        },    
+        {
+            "action_type"   : "Flaps",
+            "branch_values" : [-1,0,1]
+        },    
+        {
+            "action_type"   : "FireMissile",
+            "branch_values" : [-1,0,1]
+        },    
+        {
+            "action_type"   : "FireCannon",
+            "branch_values" : [-1,0,1]
+        }
+    ]
+}
