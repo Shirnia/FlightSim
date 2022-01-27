@@ -34,4 +34,5 @@ public class BranchData
 {
     public string action_type;
     public List<int> branch_values;
+    public List<string> description;
 }

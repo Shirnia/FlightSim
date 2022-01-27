@@ -3,31 +3,38 @@
     "branches" : [
         {
             "action_type"   : "Throttle",
-            "branch_values" : [0,0.5,1]
+            "branch_values" : [0,0.5,1],
+            "description"   : ["min throttle","...","max throttle"]
         },
         {
             "action_type"   : "Pitch",
-            "branch_values" : [-1,0,1]
+            "branch_values" : [-1,0,1],
+            "description"   : ["Pitch left","...","Pitch right"]
         }, 
         {
             "action_type"   : "Roll",
-            "branch_values" : [-1,0,1]
+            "branch_values" : [-1,0,1],
+            "description"   : ["Roll left","...","Roll right"]
         },       
         {
             "action_type"   : "Yaw",
-            "branch_values" : [-1,0,1]
+            "branch_values" : [-1,0,1],
+            "description"   : ["Yaw left","...","Yaw right"]
         },    
         {
             "action_type"   : "Flaps",
-            "branch_values" : [-1,0,1]
+            "branch_values" : [-1,0,1],
+            "description"   : ["No change","Flaps off","Flaps on"]
         },    
         {
             "action_type"   : "FireMissile",
-            "branch_values" : [-1,0,1]
+            "branch_values" : [-1,0,1],
+            "description"   : ["No change","FireMissile off","FireMissile on"]
         },    
         {
             "action_type"   : "FireCannon",
-            "branch_values" : [-1,0,1]
+            "branch_values" : [-1,0,1],
+            "description"   : ["No change","FireCannon off","FireCannon on"]
         }
     ]
 }

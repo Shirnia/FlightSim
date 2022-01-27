@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class AIController : MonoBehaviour {
     [SerializeField]
     Plane plane;
@@ -57,6 +56,8 @@ public class AIController : MonoBehaviour {
     float cannonBurstCooldown;
     [SerializeField]
     float minMissileDodgeDistance;
+    [SerializeField]
+    bool isDRLAgent = false;
 
     Target selfTarget;
     Plane targetPlane;
@@ -266,16 +267,29 @@ public class AIController : MonoBehaviour {
 
     void FixedUpdate() {
         if (plane.Dead) return;
+        if (isDRLAgent) return;
         var dt = Time.fixedDeltaTime;
 
-        Vector3 steering;
+        Steering steer = getSteering(dt);
+        SetSteeringInputs(steer);
+        CalculateWeapons(dt);
+    }
+
+    public void SetSteeringInputs(Steering steer){
+        plane.SetControlInput(steer.steering);
+        plane.SetThrottleInput(steer.throttle);
+    }
+
+    public Steering getSteering(float dt)
+    {
+        Vector3 steer;
         float throttle;
 
-        var velocityRot = Quaternion.LookRotation(plane.Rigidbody.velocity.normalized);
-        var ray = new Ray(plane.Rigidbody.position, velocityRot * Quaternion.Euler(groundAvoidanceAngle, 0, 0) * Vector3.forward);
+        Quaternion velocityRot = Quaternion.LookRotation(plane.Rigidbody.velocity.normalized);
+        Ray ray = new Ray(plane.Rigidbody.position, velocityRot * Quaternion.Euler(groundAvoidanceAngle, 0, 0) * Vector3.forward);
 
         if (Physics.Raycast(ray, groundCollisionDistance + plane.LocalAngularVelocity.z, groundCollisionMask.value)) {
-            steering = AvoidGround();
+            steer = AvoidGround();
             throttle = CalculateThrottle(groundAvoidanceMinSpeed, groundAvoidanceMaxSpeed);
         } else {
             Vector3 targetPosition;
@@ -290,17 +304,13 @@ public class AIController : MonoBehaviour {
             if (incomingMissile == null && (plane.LocalVelocity.z < recoverSpeedMin || isRecoveringSpeed)) {
                 isRecoveringSpeed = plane.LocalVelocity.z < recoverSpeedMax;
 
-                steering = RecoverSpeed();
+                steer = RecoverSpeed();
                 throttle = 1;
             } else {
-                steering = CalculateSteering(dt, targetPosition);
+                steer = CalculateSteering(dt, targetPosition);
                 throttle = CalculateThrottle(minSpeed, maxSpeed);
             }
         }
-
-        plane.SetControlInput(steering);
-        plane.SetThrottleInput(throttle);
-
-        CalculateWeapons(dt);
+        return new Steering(steer,throttle);
     }
 }
