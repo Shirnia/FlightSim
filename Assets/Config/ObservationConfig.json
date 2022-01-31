@@ -1,42 +1,77 @@
 {
     "branches" : [
         {
-            "observation_type"   : "Agent Positions",
+            "parent"             : "Both",
+            "observation_type"   : "Positions",
             "number_values"      : 3,
             "min_max_values"     : [-10000,10000],
             "description"        : ["x","y","z"]
-        },    
+        },   
         {
-            "observation_type"   : "Agent Euler Angles",
+            "parent"             : "Both",
+            "observation_type"   : "Velocities",
+            "number_values"      : 3,
+            "min_max_values"     : [-500,500],
+            "description"        : ["x","y","z"]
+        },   
+        {
+            "parent"             : "Both",
+            "observation_type"   : "EulerAngles",
             "number_values"      : 3,
             "min_max_values"     : [-360,360],
             "description"        : ["x","y","z"]
-        },    
+        },     
         {
-            "observation_type"   : "Agent Weapon Systems",
+            "parent"             : "Both",
+            "observation_type"   : "EulerVelocities",
+            "number_values"      : 3,
+            "min_max_values"     : [-10,10],
+            "description"        : ["x","y","z"]
+        },  
+        {
+            "parent"             : "Both",
+            "observation_type"   : "WeaponSystems",
             "number_values"      : 4,
             "min_max_values"     : [0,1],
             "description"        : ["Missile Lock","Missile Fire",
                                     "Gun Lock", "Gun Fire"]
-        },
-        {
-            "observation_type"   : "Target Positions",
-            "number_values"      : 3,
-            "min_max_values"     : [-10000,10000],
-            "description"        : ["x","y","z"]
         },    
         {
-            "observation_type"   : "Target Euler Angles",
-            "number_values"      : 3,
-            "min_max_values"     : [-360,360],
-            "description"        : ["x","y","z"]
+            "parent"             : "Both",
+            "observation_type"   : "HealthSystems",
+            "number_values"      : 1,
+            "min_max_values"     : [0,100],
+            "description"        : ["Health"]
         },    
         {
-            "observation_type"   : "Target Weapon Systems",
-            "number_values"      : 4,
+            "parent"             : "Both",
+            "observation_type"   : "GForces",
+            "number_values"      : 1,
+            "min_max_values"     : [-5,10],
+            "description"        : ["GForce"]
+        },    
+        {
+            "parent"             : "Both",
+            "observation_type"   : "MissileLockDir",
+            "number_values"      : 1,
+            "min_max_values"     : [-180,180],
+            "description"        : ["angle to target"]
+        },    
+        {
+            "parent"             : "Agent",
+            "observation_type"   : "IncomingMissile",
+            "number_values"      : 1,
             "min_max_values"     : [0,1],
-            "description"        : ["Missile Lock","Missile Fire",
-                                    "Gun Lock", "Gun Fire"]
+            "description"        : ["is there an incoming missile"]
+        },    
+        {
+            "parent"             : "Agent",
+            "observation_type"   : "IncomingMissileInfo",
+            "number_values"      : 5,
+            "min_max_values"     : [-10000,10000,0,20000,-180,180],
+            "description"        : ["missilePos_x","missilePos_y","missilePos_z",
+                                    "missile distance","missile angle"]
         }
+
     ]
 }

@@ -126,7 +126,7 @@ public class Plane : MonoBehaviour {
     int missileIndex;
     List<float> missileReloadTimers;
     float missileDebounceTimer;
-    Vector3 missileLockDirection;
+    public Vector3 missileLockDirection;
 
     bool cannonFiring;
     float cannonDebounceTimer;
@@ -251,6 +251,21 @@ public class Plane : MonoBehaviour {
 
         damageEffect.GetComponent<ParticleSystem>().Pause();
         deathEffect.SetActive(true);
+    }
+    public void Reset(Vector3 lookAt) {
+        Reset();
+        transform.LookAt(lookAt);
+        Rigidbody.angularVelocity = Vector3.zero;
+        Rigidbody.velocity = transform.forward*initialSpeed;
+        Velocity = Rigidbody.velocity;
+        lastVelocity = Rigidbody.velocity;
+    }
+    public void Reset() {
+        health = maxHealth;
+        Dead = false;
+        cannonFiring = false;
+
+        deathEffect.SetActive(Dead);
     }
 
     void UpdateThrottle(float dt) {
@@ -513,8 +528,8 @@ public class Plane : MonoBehaviour {
         if (Target != null && !Target.Plane.Dead) {
             var error = target.Position - Rigidbody.position;
             var errorDir = Quaternion.Inverse(Rigidbody.rotation) * error.normalized; //transform into local space
-
-            if (error.magnitude <= lockRange && Vector3.Angle(Vector3.forward, errorDir) <= lockAngle) {
+            var angle = Vector3.Angle(Vector3.forward, errorDir);
+            if (error.magnitude <= lockRange &&  angle <= lockAngle) {
                 MissileTracking = true;
                 targetDir = errorDir;
             }

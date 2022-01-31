@@ -80,7 +80,8 @@ public class PlaneHUD : MonoBehaviour {
     GameObject reticleGO;
     GameObject targetArrowGO;
     GameObject missileArrowGO;
-
+    public Missile incomingMissile;
+    public List<float> incomingMissileInfo;
     float lastUpdateTime;
 
     const float metersToKnots = 1.94384f;
@@ -279,12 +280,16 @@ public class PlaneHUD : MonoBehaviour {
     }
 
     void UpdateWarnings() {
-        var incomingMissile = selfTarget.GetIncomingMissile();
-
+        incomingMissile = selfTarget.GetIncomingMissile();
+        
         if (incomingMissile != null) {
             var missilePos = TransformToHUDSpace(incomingMissile.Rigidbody.position);
             var missileDir = (incomingMissile.Rigidbody.position - plane.Rigidbody.position).normalized;
             var missileAngle = Vector3.Angle(cameraTransform.forward, missileDir);
+
+            incomingMissileInfo.AddRange(ConvertVector3ToFloats(missilePos));
+            incomingMissileInfo.Add(Vector3.Distance(incomingMissile.Rigidbody.position,plane.Rigidbody.position));
+            incomingMissileInfo.Add(missileAngle);
 
             if (missileAngle > missileArrowThreshold) {
                 missileArrowGO.SetActive(true);
@@ -302,6 +307,7 @@ public class PlaneHUD : MonoBehaviour {
             pitchLadder.UpdateColor(lockColor);
             compass.UpdateColor(lockColor);
         } else {
+            incomingMissileInfo = new List<float>();
             missileArrowGO.SetActive(false);
 
             foreach (var graphic in missileWarningGraphics) {
@@ -313,6 +319,13 @@ public class PlaneHUD : MonoBehaviour {
         }
     }
 
+    List<float> ConvertVector3ToFloats(Vector3 vector3){
+        List<float> ret  = new List<float>();
+        for(int i =0; i<3; i++){
+            ret.Add(vector3[i]);
+        }
+        return ret;
+    }
     void LateUpdate() {
         if (plane == null) return;
         if (camera == null) return;

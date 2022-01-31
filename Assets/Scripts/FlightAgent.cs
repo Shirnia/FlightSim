@@ -14,6 +14,7 @@ public class FlightAgent : Agent
     private PlayerController playerController;
     private AIController playerAIController;
     private LoadConfig config;
+    private LoadObservations observations;
     private float t;
     [SerializeField]
     public int difficulty = 0;
@@ -22,6 +23,7 @@ public class FlightAgent : Agent
     void Start()
     {
         config = new LoadConfig();
+        observations = new LoadObservations();
         playerController = GetComponent<PlayerController>();
         playerAIController = playerPlane.GetComponent<AIController>();
     }
@@ -43,17 +45,26 @@ public class FlightAgent : Agent
         playerPlane.transform.position = new Vector3(player_xz[0],player_y,player_xz[1]);
         targetPlane.transform.position = new Vector3(target_xz[0],target_y,target_xz[1]);
 
-        Vector2 lookAt = Random.insideUnitCircle*max_radius*2;
-        playerPlane.transform.LookAt(new Vector3(lookAt[0],2500,lookAt[1]));
-        targetPlane.transform.LookAt(new Vector3(lookAt[0],2500,lookAt[1]));
+        Vector2 lookAtTmp = Random.insideUnitCircle*max_radius*2;
+        Vector3 lookAt = new Vector3(lookAtTmp[0],2500,lookAtTmp[1]);
+
+        playerPlane.Reset(lookAt);
+        targetPlane.Reset(lookAt);
     }
     
      public override void CollectObservations(VectorSensor sensor)
     {
+
     }
 
     public override void OnActionReceived(float[] vectorAction)
     {   
+        if (playerPlane.Dead){
+            EndEpisode();
+        } else if (targetPlane.Dead){
+            AddReward(+1f);
+            EndEpisode();
+        }
         float throttle = 0;
         float pitch = 0;
         float roll = 0;
