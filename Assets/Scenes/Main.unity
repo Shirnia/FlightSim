@@ -1633,7 +1633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 10
+  DecisionPeriod: 20
   TakeActionsBetweenDecisions: 1
 --- !u!114 &583992419
 MonoBehaviour:
@@ -1650,7 +1650,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 500
+  MaxStep: 2000
   playerPlane: {fileID: 716492603949598967}
   targetPlane: {fileID: 1030071069890836196}
   difficulty: 0
@@ -3982,9 +3982,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1030071069971577036, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
         type: 3}
+      propertyPath: health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030071069971577036, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
+        type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2515223684885814276}
+    - target: {fileID: 1030071069971577036, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
+        type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5515725321500408573, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
         type: 3}
       propertyPath: m_RootOrder
@@ -4297,5 +4307,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 20258855}
+    - target: {fileID: 7240101037155634182, guid: 233ce27cd0345c84b8909bd4ec909b45,
+        type: 3}
+      propertyPath: hardpoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 233ce27cd0345c84b8909bd4ec909b45, type: 3}
