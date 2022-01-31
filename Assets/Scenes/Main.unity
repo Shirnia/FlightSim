@@ -583,6 +583,8 @@ MonoBehaviour:
   - {fileID: 1641956028}
   - {fileID: 1826498456}
   - {fileID: 1124648713}
+  incomingMissile: {fileID: 0}
+  incomingMissileInfo: []
 --- !u!1 &254807492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,7 +1633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 10
   TakeActionsBetweenDecisions: 1
 --- !u!114 &583992419
 MonoBehaviour:
@@ -1648,7 +1650,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 20
+  MaxStep: 500
   playerPlane: {fileID: 716492603949598967}
   targetPlane: {fileID: 1030071069890836196}
   difficulty: 0
@@ -1665,7 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 0
+    VectorObservationSize: 46
     NumStackedVectorObservations: 1
     VectorActionSize: 03000000030000000300000003000000030000000300000003000000
     VectorActionDescriptions: []

@@ -14,7 +14,8 @@ public class FlightAgent : Agent
     private PlayerController playerController;
     private AIController playerAIController;
     private LoadConfig config;
-    private LoadObservations observations;
+    private LoadObservations observationConfig;
+    private ObservationParser observationParser;
     private float t;
     [SerializeField]
     public int difficulty = 0;
@@ -23,9 +24,10 @@ public class FlightAgent : Agent
     void Start()
     {
         config = new LoadConfig();
-        observations = new LoadObservations();
+        observationConfig = new LoadObservations();
         playerController = GetComponent<PlayerController>();
         playerAIController = playerPlane.GetComponent<AIController>();
+        observationParser = new ObservationParser(this);
     }
 
      public override void OnEpisodeBegin()
@@ -54,7 +56,16 @@ public class FlightAgent : Agent
     
      public override void CollectObservations(VectorSensor sensor)
     {
-
+        Debug.Log("*************************************************************");
+        foreach (ObservationInfo oi in observationConfig.observationBase.branches){
+            List<float> obs = observationParser.ParseObs(oi);
+            foreach( var x in obs) {
+                if (x > 1 || x < 0)
+                    Debug.Log("Observation buggered, type: "+oi.observation_type+", actual val: "+oi.number_values+", obs value: "+x.ToString());
+            }
+            sensor.AddObservation(obs);
+        }
+        Debug.Log("*************************************************************");
     }
 
     public override void OnActionReceived(float[] vectorAction)

@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 
 public class LoadObservations 
 {
-    public ObservationInfo observationInfo;
+    public ObservationBase observationBase;
 
     public LoadObservations()
     {
@@ -16,7 +16,7 @@ public class LoadObservations
         if(System.IO.File.Exists(data))
         {
             string json_txt = File.ReadAllText(data);
-            observationInfo = JsonUtility.FromJson<ObservationInfo>(json_txt);
+            observationBase = JsonUtility.FromJson<ObservationBase>(json_txt);
         } 
         else
         {
@@ -28,6 +28,10 @@ public class LoadObservations
 public enum Parent { Agent, Target, Missile }
 
 public enum ObservationType { Positions, Velocities, EulerAngles, WeaponSystems, HealthSystems }
+
+public class ObservationBase{
+    public List<ObservationInfo> branches;
+}
 
 [System.Serializable]
 public class ObservationInfo

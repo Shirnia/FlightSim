@@ -31,10 +31,10 @@
         {
             "parent"             : "Both",
             "observation_type"   : "WeaponSystems",
-            "number_values"      : 4,
+            "number_values"      : 3,
             "min_max_values"     : [0,1],
             "description"        : ["Missile Lock","Missile Fire",
-                                    "Gun Lock", "Gun Fire"]
+                                    "Gun Fire"]
         },    
         {
             "parent"             : "Both",
@@ -47,14 +47,14 @@
             "parent"             : "Both",
             "observation_type"   : "GForces",
             "number_values"      : 1,
-            "min_max_values"     : [-5,10],
+            "min_max_values"     : [-10,20],
             "description"        : ["GForce"]
         },    
         {
             "parent"             : "Both",
             "observation_type"   : "MissileLockDir",
             "number_values"      : 1,
-            "min_max_values"     : [-180,180],
+            "min_max_values"     : [-360,360],
             "description"        : ["angle to target"]
         },    
         {
@@ -66,11 +66,24 @@
         },    
         {
             "parent"             : "Agent",
-            "observation_type"   : "IncomingMissileInfo",
-            "number_values"      : 5,
-            "min_max_values"     : [-10000,10000,0,20000,-180,180],
-            "description"        : ["missilePos_x","missilePos_y","missilePos_z",
-                                    "missile distance","missile angle"]
+            "observation_type"   : "IncomingMissilePos",
+            "number_values"      : 2,
+            "min_max_values"     : [-10000,10000],
+            "description"        : ["missilePos_x","missilePos_y"]
+        },    
+        {
+            "parent"             : "Agent",
+            "observation_type"   : "IncomingMissileDist",
+            "number_values"      : 1,
+            "min_max_values"     : [0,20000],
+            "description"        : ["missile distance"]
+        },    
+        {
+            "parent"             : "Agent",
+            "observation_type"   : "IncomingMissileAngle",
+            "number_values"      : 1,
+            "min_max_values"     : [-360,360],
+            "description"        : ["missile angle relative to plane pointing position"]
         }
 
     ]

@@ -128,7 +128,7 @@ public class Plane : MonoBehaviour {
     float missileDebounceTimer;
     public Vector3 missileLockDirection;
 
-    bool cannonFiring;
+    public bool cannonFiring;
     float cannonDebounceTimer;
     float cannonFiringTimer;
 
