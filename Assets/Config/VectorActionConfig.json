@@ -3,7 +3,7 @@
     "branches" : [
         {
             "action_type"   : "Throttle",
-            "branch_values" : [0,0.5,1],
+            "branch_values" : [-1,0,1],
             "description"   : ["min throttle","...","max throttle"]
         },
         {

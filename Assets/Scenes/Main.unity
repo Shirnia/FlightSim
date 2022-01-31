@@ -684,7 +684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &254807493
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1438,7 +1438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &471972767
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1676,14 +1676,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 583992417}
-  - component: {fileID: 583992423}
+  - component: {fileID: 583992419}
   - component: {fileID: 583992422}
   - component: {fileID: 583992421}
   - component: {fileID: 583992420}
-  - component: {fileID: 583992419}
   - component: {fileID: 583992418}
-  - component: {fileID: 583992425}
-  - component: {fileID: 583992424}
   m_Layer: 0
   m_Name: FlightAgent
   m_TagString: Untagged
@@ -1736,6 +1733,9 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  playerPlane: {fileID: 716492603949598967}
+  targetPlane: {fileID: 1264406913}
+  difficulty: 0
 --- !u!114 &583992420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1795,236 +1795,6 @@ MonoBehaviour:
   camera: {fileID: 1694574082}
   plane: {fileID: 716492603949598967}
   planeHUD: {fileID: 193187219}
---- !u!114 &583992423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583992416}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: b039139a8b18730478a752ddd0f31038,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SetThrottleInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0d46f8f2-2f6f-4fe2-8623-427c869c3bde
-    m_ActionName: Plane/Throttle[/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightShoulder]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnRollPitchInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7173b259-7215-456e-ba7f-dba1aaad27e1
-    m_ActionName: Plane/RollPitch[/XInputControllerWindows/leftStick]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnYawInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 56c160cd-3545-4284-abef-8d6eb62ab74c
-    m_ActionName: Plane/Yaw[/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightTrigger]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnCameraInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cdd2542b-3da6-4431-be9c-bbf306e4dcd5
-    m_ActionName: Plane/Camera[/XInputControllerWindows/rightStick]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnFlapsInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0e572958-b17b-4a43-950d-d9a9324fbc89
-    m_ActionName: Plane/ToggleFlaps[/XInputControllerWindows/dpad/down]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnToggleHelp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a601469b-e3aa-422a-806a-4f7dcba55332
-    m_ActionName: Plane/ToggleHelp[/Keyboard/h]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnFireMissile
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 54bc0053-bbe2-45cd-80b6-dd2a4f0dee6d
-    m_ActionName: Plane/FireMissile[/XInputControllerWindows/buttonEast]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnFireCannon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cc901d01-643f-4c28-918b-23ed83f6433c
-    m_ActionName: Plane/FireCannon[/XInputControllerWindows/buttonSouth]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 583992422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnToggleAI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: b0d256fa-cc8c-4a22-925d-479ad7049947
-    m_ActionName: Plane/ToggleAI[/Keyboard/space]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Plane
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &583992424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583992416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e18d00c010aab047afd893019ac2ced, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: F-15 (1)
---- !u!114 &583992425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583992416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 523b6d4a45fda5a4990cea481944fdae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plane: {fileID: 1544984390}
-  steeringSpeed: 5
-  minSpeed: 175
-  maxSpeed: 225
-  recoverSpeedMin: 125
-  recoverSpeedMax: 140
-  groundCollisionMask:
-    serializedVersion: 2
-    m_Bits: 1
-  groundCollisionDistance: 500
-  groundAvoidanceAngle: 10
-  groundAvoidanceMinSpeed: 125
-  groundAvoidanceMaxSpeed: 150
-  pitchUpThreshold: -15
-  fineSteeringAngle: 5
-  rollFactor: 0.01
-  canUseMissiles: 1
-  canUseCannon: 1
-  missileLockFiringDelay: 1
-  missileFiringCooldown: 5
-  missileMinRange: 500
-  missileMaxRange: 1500
-  missileMaxFireAngle: 5
-  bulletSpeed: 1000
-  cannonRange: 1000
-  cannonMaxFireAngle: 2.5
-  cannonBurstLength: 0.5
-  cannonBurstCooldown: 2.5
-  minMissileDodgeDistance: 100
-  isNotDRL: 1
 --- !u!1 &733149113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3030,6 +2800,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e18d00c010aab047afd893019ac2ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1264406913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1030071069971577036, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 221253160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5585d18e17682b468f5ee1b417e5df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1388606430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3047,7 +2829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1388606431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3303,18 +3085,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 221253160}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1544984390 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1030071069971577036, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 221253160}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5585d18e17682b468f5ee1b417e5df8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1550426551
 GameObject:
   m_ObjectHideFlags: 0
@@ -4065,7 +3835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &1951959132
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -4256,7 +4026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2112024344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4332,6 +4102,11 @@ PrefabInstance:
       propertyPath: initialSpeed
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 2515223684704408108, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3168297468136084144, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
         type: 3}
       propertyPath: m_Enabled
@@ -4340,7 +4115,12 @@ PrefabInstance:
     - target: {fileID: 3737572916587997159, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737572916587997159, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
+        type: 3}
+      propertyPath: isDRLAgent
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5515725321500408573, guid: 868b13a7be7adb148b89b9bcf56bb6a6,
         type: 3}

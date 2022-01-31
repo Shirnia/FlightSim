@@ -9,21 +9,43 @@ using System.Linq;
 
 public class FlightAgent : Agent
 {
+    public Plane playerPlane;
+    public Plane targetPlane;
     private PlayerController playerController;
-    private AIController aiController;
+    private AIController playerAIController;
     private LoadConfig config;
     private float t;
+    [SerializeField]
+    public int difficulty = 0;
     // Start is called before the first frame update
 
     void Start()
     {
-        playerController = GetComponentInParent<PlayerController>();
-        aiController = GetComponent<AIController>();
         config = new LoadConfig();
+        playerController = GetComponent<PlayerController>();
+        playerAIController = playerPlane.GetComponent<AIController>();
     }
 
      public override void OnEpisodeBegin()
     {
+        float max_radius = 2500;
+        //Get XZ of player+target
+        Vector2 player_xz = Random.insideUnitCircle*max_radius;
+        Vector2 target_xz;
+        do {
+            target_xz = Random.insideUnitCircle*max_radius;
+        } 
+        while (Vector2.Distance(player_xz,target_xz) < 0.2*max_radius);
+        //Get Y of plauer+target
+        float player_y = Random.Range(1000,5000);
+        float target_y = Random.Range(1000,5000);
+
+        playerPlane.transform.position = new Vector3(player_xz[0],player_y,player_xz[1]);
+        targetPlane.transform.position = new Vector3(target_xz[0],target_y,target_xz[1]);
+
+        Vector2 lookAt = Random.insideUnitCircle*max_radius*2;
+        playerPlane.transform.LookAt(new Vector3(lookAt[0],2500,lookAt[1]));
+        targetPlane.transform.LookAt(new Vector3(lookAt[0],2500,lookAt[1]));
     }
     
      public override void CollectObservations(VectorSensor sensor)
@@ -70,13 +92,13 @@ public class FlightAgent : Agent
             index ++;
         }
         Vector3 RollPitchYaw = new Vector3(pitch,yaw,roll);
-        aiController.SetSteeringInputs(new Steering(RollPitchYaw,throttle));
+        playerAIController.SetSteeringInputs(new Steering(RollPitchYaw,throttle));
     }
 
     public override void Heuristic(float[] actionsOut)
     {   
         float dt = Time.time - t;        
-        Steering steering = aiController.getSteering(dt);
+        Steering steering = playerAIController.getSteering(dt);
         t = Time.time;
         int index = 0;
         int action;
@@ -103,16 +125,26 @@ public class FlightAgent : Agent
                     actionsOut[index] = 0;
                     break;
                 case "FireMissile":
-                    actionsOut[index] = 0;
+                    if (playerAIController.CalculateMissiles(dt))
+                    {
+                        Debug.Log("firing missile");
+                        actionsOut[index] = 2;
+                    } else {
+                        actionsOut[index] = 1;
+                    }
                     break;
                 case "FireCannon":
-                    actionsOut[index] = 0;
+                    if (playerAIController.CalculateCannon(dt))
+                    {
+                        Debug.Log("firing missile");
+                        actionsOut[index] = 2;
+                    } else {
+                        actionsOut[index] = 1;
+                    }
                     break;
             }
             index ++;
         }
-        Debug.Log("steering Throttle: "+steering.throttle+" steering: "+steering.steering);
-        Debug.Log(actionsOut.ToString());
     }
 
 }

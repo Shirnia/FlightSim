@@ -204,15 +204,17 @@ public class AIController : MonoBehaviour {
         if (plane.Target == null) return;
 
         if (canUseMissiles) {
-            CalculateMissiles(dt);
+            if(CalculateMissiles(dt))
+                plane.TryFireMissile();
         }
 
         if (canUseCannon) {
-            CalculateCannon(dt);
+            if (CalculateCannon(dt))
+                plane.SetCannonInput(true);
         }
     }
 
-    void CalculateMissiles(float dt) {
+    public bool CalculateMissiles(float dt) {
         missileDelayTimer = Mathf.Max(0, missileDelayTimer - dt);
         missileCooldownTimer = Mathf.Max(0, missileCooldownTimer - dt);
 
@@ -228,15 +230,18 @@ public class AIController : MonoBehaviour {
         }
 
         if (range < missileMaxRange && range > missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0) {
-            plane.TryFireMissile();
             missileCooldownTimer = missileFiringCooldown;
+            return true;
         }
+
+        return false;
     }
 
-    void CalculateCannon(float dt) {
+
+    public bool CalculateCannon(float dt) {
         if (targetPlane.Health == 0) {
             cannonFiring = false;
-            return;
+            return false;
         }
 
         if (cannonFiring) {
@@ -260,9 +265,10 @@ public class AIController : MonoBehaviour {
             if (range < cannonRange && targetAngle < cannonMaxFireAngle && cannonCooldownTimer == 0) {
                 cannonFiring = true;
                 cannonBurstTimer = cannonBurstLength;
-                plane.SetCannonInput(true);
+                return true;
             }
         }
+        return false;
     }
 
     void FixedUpdate() {
